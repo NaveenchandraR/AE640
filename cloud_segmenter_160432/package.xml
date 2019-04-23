@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <!-- Shah Aalap Anil (160432) - aalap@iitk.ac.in -->
+
+  <name>cloud_segmenter_160432</name>
+  <version>0.0.0</version>
+  <description>Performs plane segmentation on a subscribed topic using RANSAC</description>
+
+  <maintainer email="aalap@iitk.ac.in">Aalap Shah</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>pcl_ros</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_export_depend>pcl_ros</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <exec_depend>pcl_ros</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  
+</package>

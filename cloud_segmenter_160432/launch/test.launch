@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+	Use the roslaunch command to run this file
+	It will open rviz, play the recorded data, and run your node
+ -->
+
+<!-- MAKE SURE TO REPLACE CLOUD_SEGMENTER_160432 WITH YOUR OWN PACKAGE NAME -->
+
+<launch>
+
+	<!-- Loading rviz config for visualizing input and output -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find cloud_segmenter_160432)/rviz/test.rviz"/>
+	
+	<!-- Playing recorded data for input -->
+	<node name="rosbag" pkg="rosbag" type="play" args="-l $(find cloud_segmenter_160432)/bag/test.bag"/>
+
+	<!-- Running the main pointcloud segmentation node -->
+	<param name="threshold" value="0.03"/>		<!-- threshold distance for considering a point as inlier -->
+	<param name="d_required" value="100000"/>	<!-- number of inlier data points required to assume successful fit -->
+	<param name="w" value="0.30"/>				<!-- inlier fraction -->
+	<param name="p" value="0.99"/>				<!-- required success probability -->
+	<node name="cloud_segmenter" pkg="cloud_segmenter_160432" type="cloud_segmenter_node" output="screen"/>
+
+</launch>

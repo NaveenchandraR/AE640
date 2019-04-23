@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+	Use the roslaunch command to run this file
+	It will open rviz, play the recorded data, and run your node
+ -->
+
+<!-- MAKE SURE TO REPLACE RRT_PLANNER_160432 WITH YOUR OWN PACKAGE NAME -->
+
+<launch>
+	<!-- Loading rviz config for visualizing input and output -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find rrt_planner_160432)/rviz/test.rviz"/>
+	
+	<!-- Playing recorded data for input -->
+	<node name="rosbag" pkg="rosbag" type="play" args="-l $(find rrt_planner_160432)/bag/test.bag"/>
+
+	<!-- Starting the main path planning node -->
+	<param name="max_nodes" type="int" value="5000"/>			<!-- the maximum number of nodes to include in the tree -->
+	<param name="max_iterations" type="int" value="1000000"/>	<!-- the maximum number of iterations to run before halting -->
+	<param name="delta_step" type="double" value="10.0"/>		<!-- the maximum allowable size of a step -->
+	<param name="max_angle" type="double" value="30.0"/>		<!-- maximum allowable turning angle between consecutive steps -->
+	<rosparam param="initial_position">[0.0, 0.0]</rosparam>	<!-- initial co-ordinates (x, y) in the cfg_space -->	
+	<param name="initial_yaw" type="double" value="-30.0"/>		<!-- initial yaw in degrees -->
+	<rosparam param="goal_position">[-1.0, -5.0]</rosparam>		<!-- goal co-ordinates (x, y) in the cfg_space -->
+	<node name="rrt_planner" pkg="rrt_planner_160432" type="rrt_planner_node" output="screen">
+		<remap from="cfg_space" to="costmap_node/costmap/costmap"/>
+	</node>
+
+</launch>
